@@ -24,8 +24,8 @@ exports.login = new Controller()
   });
 exports.refreshToken = new Controller()
   .post(200)
-  .ctx('auth')
-  .handle(async (ctx) => await AuthService.refreshToken(ctx.auth.refreshToken));
+  .ctx('body')
+  .handle(async (ctx) => await AuthService.refreshToken(ctx.body.refreshToken));
 exports.updateProfile = new Controller()
   .post(200)
   .ctx('body', 'user')
@@ -44,9 +44,9 @@ exports.updatePassword = new Controller()
   );
 exports.logout = new Controller()
   .post(200)
-  .ctx('auth', 'polyglot')
+  .ctx('body', 'polyglot')
   .handle(async (ctx) => {
-    await AuthService.logout(ctx.auth.refreshToken);
+    await AuthService.logout(ctx.body.refreshToken);
 
     return {
       message: ctx.polyglot.t('auth.logout.success'),

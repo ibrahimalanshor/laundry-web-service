@@ -23,7 +23,10 @@ module.exports = Router([
   {
     path: '/auth/refresh-token',
     method: 'post',
-    handler: [authMiddleware, AuthController.refreshToken],
+    handler: [
+      createRequestValidator(AuthRequest.refreshToken),
+      AuthController.refreshToken,
+    ],
   },
   {
     path: '/auth/update-profile',
@@ -55,6 +58,9 @@ module.exports = Router([
   {
     path: '/auth/logout',
     method: 'post',
-    handler: [authMiddleware, AuthController.logout],
+    handler: [
+      createRequestValidator(AuthRequest.logout),
+      AuthController.logout,
+    ],
   },
 ]);
