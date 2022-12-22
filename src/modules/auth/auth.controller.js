@@ -26,6 +26,10 @@ exports.refreshToken = new Controller()
   .post(200)
   .ctx('body')
   .handle(async (ctx) => await AuthService.refreshToken(ctx.body.refreshToken));
+exports.getProfile = new Controller()
+  .get()
+  .ctx('user')
+  .handle((ctx) => ctx.user);
 exports.updateProfile = new Controller()
   .post(200)
   .ctx('body', 'user')

@@ -29,6 +29,11 @@ module.exports = Router([
     ],
   },
   {
+    path: '/auth/profile',
+    method: 'get',
+    handler: [authMiddleware, AuthController.getProfile],
+  },
+  {
     path: '/auth/update-profile',
     method: 'post',
     handler: [
