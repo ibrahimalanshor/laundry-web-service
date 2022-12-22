@@ -11,6 +11,7 @@ const PacketSchema = new Schema(
       type: String,
       enum: ['satuan', 'kiloan'],
     },
+    price: Number,
   },
   {
     timestamps: true,
