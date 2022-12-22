@@ -48,4 +48,24 @@ module.exports = [
     .isInt({ min: 1 })
     .withMessage('validation.integer')
     .bail(),
+  body('processing_time')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .isInt({ min: 1 })
+    .withMessage('validation.integer')
+    .bail(),
+  body('processing_time_type')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isString()
+    .withMessage('validation.string')
+    .bail()
+    .isIn(['jam', 'hari'])
+    .withMessage('validation.invalid')
+    .bail(),
 ];
