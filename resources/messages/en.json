@@ -42,5 +42,8 @@
         "logout": {
             "success": "Logout Succes"
         }
+    },
+    "perfume": {
+        "stock-invalid": "Stock Invalid"
     }
 }
