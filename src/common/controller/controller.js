@@ -70,6 +70,9 @@ Controller.prototype.getCtx = function (req) {
       case 'polyglot':
         resCtx.polyglot = req.polyglot;
         break;
+      case 'file':
+        resCtx.file = req.file;
+        break;
       default:
         break;
     }

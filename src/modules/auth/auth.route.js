@@ -1,5 +1,6 @@
 const { Router } = require('../../common/router');
 const { createRequestValidator } = require('../../common/request-validator');
+const { createUploadMiddleware } = require('../../common/upload');
 
 const authMiddleware = require('./auth.middleware.js');
 const AuthController = require('./auth.controller');
@@ -28,6 +29,11 @@ module.exports = Router([
     ],
   },
   {
+    path: '/auth/profile',
+    method: 'get',
+    handler: [authMiddleware, AuthController.getProfile],
+  },
+  {
     path: '/auth/update-profile',
     method: 'post',
     handler: [
@@ -46,8 +52,20 @@ module.exports = Router([
     ],
   },
   {
+    path: '/auth/update-photo',
+    method: 'post',
+    handler: [
+      authMiddleware,
+      createUploadMiddleware(AuthRequest.uploadPhoto),
+      AuthController.updatePhoto,
+    ],
+  },
+  {
     path: '/auth/logout',
     method: 'post',
-    handler: [authMiddleware, AuthController.logout],
+    handler: [
+      createRequestValidator(AuthRequest.logout),
+      AuthController.logout,
+    ],
   },
 ]);

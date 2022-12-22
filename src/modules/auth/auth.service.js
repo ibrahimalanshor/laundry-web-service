@@ -78,6 +78,12 @@ async function updateProfile(user, body) {
   }
 }
 
+async function updatePhoto(user, photo) {
+  await UserService.update(user, { photo });
+
+  return user;
+}
+
 async function updatePassword(user, password) {
   await UserService.updatePassword(user, password);
 
@@ -101,6 +107,7 @@ module.exports = {
   login,
   refreshToken,
   updateProfile,
+  updatePhoto,
   updatePassword,
   logout,
 };
