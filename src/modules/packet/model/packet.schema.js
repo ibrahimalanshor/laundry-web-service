@@ -12,6 +12,11 @@ const PacketSchema = new Schema(
       enum: ['satuan', 'kiloan'],
     },
     price: Number,
+    processing_time: Number,
+    processing_time_type: {
+      type: String,
+      enum: ['jam', 'hari'],
+    },
   },
   {
     timestamps: true,
