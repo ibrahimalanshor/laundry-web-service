@@ -1,5 +1,6 @@
 const { Router } = require('../../common/router');
 const { createRequestValidator } = require('../../common/request-validator');
+const createGroupRoleMiddleware = require('../role/group-role.middleware.js');
 
 const PacketController = require('./packet.controller');
 const PacketRequest = require('./requests');
@@ -9,13 +10,18 @@ module.exports = Router([
   {
     path: '/packets',
     method: 'get',
-    handler: [authMiddleware, PacketController.get],
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      PacketController.get,
+    ],
   },
   {
     path: '/packets',
     method: 'post',
     handler: [
       authMiddleware,
+      createGroupRoleMiddleware('admin'),
       createRequestValidator(PacketRequest.create),
       PacketController.create,
     ],
@@ -23,13 +29,18 @@ module.exports = Router([
   {
     path: '/packets/:id',
     method: 'get',
-    handler: [authMiddleware, PacketController.find],
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      PacketController.find,
+    ],
   },
   {
     path: '/packets/:id',
     method: 'patch',
     handler: [
       authMiddleware,
+      createGroupRoleMiddleware('admin'),
       createRequestValidator(PacketRequest.update),
       PacketController.update,
     ],
@@ -37,6 +48,10 @@ module.exports = Router([
   {
     path: '/packets/:id',
     method: 'delete',
-    handler: [authMiddleware, PacketController.delete],
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      PacketController.delete,
+    ],
   },
 ]);
