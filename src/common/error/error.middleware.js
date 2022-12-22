@@ -6,7 +6,11 @@ module.exports = function (config = {}) {
       return res.status(err.status).json({
         status: err.status,
         name: req.polyglot.t(`http.${err.status}`),
-        message: req.polyglot.t(err.message ?? `http.${err.status}`),
+        message: err.message
+          ? typeof err.message === 'object'
+            ? req.polyglot.t(err.message.key, err.message.args)
+            : req.polyglot.t(err.message)
+          : req.polyglot.t(`http.${err.status}`),
         errors: err.errors,
       });
     }
