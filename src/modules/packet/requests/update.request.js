@@ -41,4 +41,11 @@ module.exports = [
     .isIn(['satuan', 'kiloan'])
     .withMessage('validation.invalid')
     .bail(),
+  body('price')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .isInt({ min: 1 })
+    .withMessage('validation.integer')
+    .bail(),
 ];
