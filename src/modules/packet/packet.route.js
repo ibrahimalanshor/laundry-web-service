@@ -1,5 +1,6 @@
 const { Router } = require('../../common/router');
 const { createRequestValidator } = require('../../common/request-validator');
+const { createUploadMiddleware } = require('../../common/upload');
 const createGroupRoleMiddleware = require('../role/group-role.middleware.js');
 
 const PacketController = require('./packet.controller');
@@ -52,6 +53,16 @@ module.exports = Router([
       authMiddleware,
       createGroupRoleMiddleware('admin'),
       PacketController.delete,
+    ],
+  },
+  {
+    path: '/packets/:id/photo',
+    method: 'patch',
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      createUploadMiddleware(PacketRequest.uploadPhoto),
+      PacketController.updatePhoto,
     ],
   },
 ]);
