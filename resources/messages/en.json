@@ -1,0 +1,42 @@
+{
+    "title": "Taks Api",
+    "http": {
+        "200": "Ok",
+        "201": "Created",
+        "401": "Unauntheticated",
+        "403": "Conflict",
+        "404": "Not Found",
+        "422": "Unprocessable Entity",
+        "500": "Internal Server Error"
+    },
+    "validation": {
+        "exists": "the %{path} must be exists",
+        "already-exists": "the %{path} is already exists",
+        "not-exists": "the %{path} is not exists",
+        "mongoid": "the %{path} must be mongoid",
+        "string": "the %{path} must be string",
+        "integer": "the %{path} must be integer",
+        "email": "the %{path} must be email",
+        "jwt": "the %{path} must be jwt",
+        "array": "the %{path} must be array",
+        "not-empty": "the %{path} must be not empty",
+        "invalid": "the %{path} is invalid"
+    },
+    "auth": {
+        "token-required": "Token required",
+        "token-invalid": "Token Invalid",
+        "register": {
+            "already-exists": "User already exists"
+        },
+        "login": {
+            "not-exists": "User not exists",
+            "invalid-credential": "Email or password incorrect"
+        },
+        "update-profile": {
+            "already-exists": "Email or username already exists"
+        },
+        "logout": {
+            "success": "Logout Succes"
+        }
+    }
+}
