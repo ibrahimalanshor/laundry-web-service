@@ -20,6 +20,16 @@ module.exports = [
     .isString()
     .withMessage('validation.string')
     .bail(),
+  body('name')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isString()
+    .withMessage('validation.string')
+    .bail(),
   body('password')
     .exists({ checkNull: true, checkFalsy: true })
     .withMessage('validation.exists')
