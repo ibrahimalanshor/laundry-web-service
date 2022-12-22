@@ -21,6 +21,14 @@ exports.update = new Controller()
   .ctx('params', 'body')
   .handle(async (ctx) => await PacketService.update(ctx.params.id, ctx.body));
 
+exports.updatePhoto = new Controller()
+  .patch()
+  .ctx('params', 'file')
+  .handle(
+    async (ctx) =>
+      await PacketService.update(ctx.params.id, { photo: ctx.file.filename })
+  );
+
 exports.delete = new Controller()
   .patch()
   .ctx('params')

@@ -17,6 +17,7 @@ const PacketSchema = new Schema(
       type: String,
       enum: ['jam', 'hari'],
     },
+    photo: String,
   },
   {
     timestamps: true,
