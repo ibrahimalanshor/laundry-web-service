@@ -3,6 +3,7 @@
     "http": {
         "200": "Ok",
         "201": "Created",
+        "400": "Bad Request",
         "401": "Unauntheticated",
         "403": "Conflict",
         "404": "Not Found",
@@ -20,11 +21,13 @@
         "jwt": "the %{path} must be jwt",
         "array": "the %{path} must be array",
         "not-empty": "the %{path} must be not empty",
-        "invalid": "the %{path} is invalid"
+        "invalid": "the %{path} is invalid",
+        "mime": "the %{path} is not supported"
     },
     "auth": {
         "token-required": "Token required",
         "token-invalid": "Token Invalid",
+        "photo-required": "File required",
         "register": {
             "already-exists": "User already exists"
         },
