@@ -21,6 +21,17 @@ exports.update = new Controller()
   .ctx('params', 'body')
   .handle(async (ctx) => await PerfumeService.update(ctx.params.id, ctx.body));
 
+exports.updateStock = new Controller()
+  .patch()
+  .ctx('params', 'body')
+  .handle(
+    async (ctx) =>
+      await PerfumeService.updateStock(
+        ctx.params.id,
+        ctx.body.type === 'increment' ? ctx.body.stock : -ctx.body.stock
+      )
+  );
+
 exports.delete = new Controller()
   .patch()
   .ctx('params')

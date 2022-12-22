@@ -46,6 +46,16 @@ module.exports = Router([
     ],
   },
   {
+    path: '/perfumes/:id/stock',
+    method: 'patch',
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      createRequestValidator(PerfumeRequest.updateStock),
+      PerfumeController.updateStock,
+    ],
+  },
+  {
     path: '/perfumes/:id',
     method: 'delete',
     handler: [
