@@ -5,7 +5,8 @@
         "201": "Created",
         "400": "Bad Request",
         "401": "Unauntheticated",
-        "403": "Conflict",
+        "403": "Forbidden",
+        "409": "Conflict",
         "404": "Not Found",
         "422": "Unprocessable Entity",
         "500": "Internal Server Error"
