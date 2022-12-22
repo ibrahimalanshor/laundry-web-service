@@ -23,8 +23,8 @@ module.exports = Router([
     path: '/auth/refresh-token',
     method: 'post',
     handler: [
-      createRequestValidator(AuthRequest.refreshToken),
-      AuthController.refreshToken,
+      authMiddleware,
+      AuthController.refreshToken
     ],
   },
   {
