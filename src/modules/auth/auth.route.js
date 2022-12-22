@@ -1,5 +1,6 @@
 const { Router } = require('../../common/router');
 const { createRequestValidator } = require('../../common/request-validator');
+const { createUploadMiddleware } = require('../../common/upload');
 
 const authMiddleware = require('./auth.middleware.js');
 const AuthController = require('./auth.controller');
@@ -22,10 +23,7 @@ module.exports = Router([
   {
     path: '/auth/refresh-token',
     method: 'post',
-    handler: [
-      authMiddleware,
-      AuthController.refreshToken
-    ],
+    handler: [authMiddleware, AuthController.refreshToken],
   },
   {
     path: '/auth/update-profile',
@@ -43,6 +41,15 @@ module.exports = Router([
       authMiddleware,
       createRequestValidator(AuthRequest.updatePassword),
       AuthController.updatePassword,
+    ],
+  },
+  {
+    path: '/auth/update-photo',
+    method: 'post',
+    handler: [
+      authMiddleware,
+      createUploadMiddleware(AuthRequest.uploadPhoto),
+      AuthController.updatePhoto,
     ],
   },
   {

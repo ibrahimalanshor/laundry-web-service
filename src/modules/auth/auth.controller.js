@@ -30,6 +30,12 @@ exports.updateProfile = new Controller()
   .post(200)
   .ctx('body', 'user')
   .handle(async (ctx) => await AuthService.updateProfile(ctx.user, ctx.body));
+exports.updatePhoto = new Controller()
+  .post(200)
+  .ctx('user', 'file')
+  .handle(
+    async (ctx) => await AuthService.updatePhoto(ctx.user, ctx.file.filename)
+  );
 exports.updatePassword = new Controller()
   .post(200)
   .ctx('body', 'user')
