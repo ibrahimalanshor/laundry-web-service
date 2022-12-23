@@ -12,6 +12,7 @@ const PerfumeSchema = new Schema(
       type: Number,
       default: 0,
     },
+    photo: String,
   },
   {
     timestamps: true,
