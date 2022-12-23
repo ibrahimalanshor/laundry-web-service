@@ -1,0 +1,55 @@
+const { body } = require('express-validator');
+const UserQuery = require('../../user/user.query.js');
+
+module.exports = [
+  body('packetId')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isMongoId()
+    .withMessage('validation.mongoid')
+    .bail(),
+  body('perfumeId')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isMongoId()
+    .withMessage('validation.mongoid')
+    .bail(),
+  body('details')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isArray({ min: 1 })
+    .withMessage('validation.array')
+    .bail(),
+  body('details.*.qty')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isInt()
+    .withMessage('validation.integer')
+    .bail(),
+  body('details.*.packetItemId')
+    .exists({ checkNull: true, checkFalsy: true })
+    .withMessage('validation.exists')
+    .bail()
+    .notEmpty()
+    .withMessage('validation.not-empty')
+    .bail()
+    .isMongoId()
+    .withMessage('validation.mongoid')
+    .bail(),
+];
