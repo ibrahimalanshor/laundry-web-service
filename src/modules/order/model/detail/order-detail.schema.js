@@ -3,9 +3,9 @@ const { Schema } = require('mongoose');
 const OrderDetailSchema = new Schema({
   qty: Number,
   totalPrice: Number,
-  packetItemId: {
+  itemId: {
     type: Schema.Types.ObjectId,
-    ref: 'packet_item',
+    ref: 'item',
   },
 });
 
