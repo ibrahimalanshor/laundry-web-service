@@ -32,6 +32,14 @@ exports.updateStock = new Controller()
       )
   );
 
+exports.updatePhoto = new Controller()
+  .patch()
+  .ctx('params', 'file')
+  .handle(
+    async (ctx) =>
+      await PerfumeService.update(ctx.params.id, { photo: ctx.file.filename })
+  );
+
 exports.delete = new Controller()
   .patch()
   .ctx('params')

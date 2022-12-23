@@ -1,5 +1,6 @@
 const { Router } = require('../../common/router');
 const { createRequestValidator } = require('../../common/request-validator');
+const { createUploadMiddleware } = require('../../common/upload');
 const createGroupRoleMiddleware = require('../role/group-role.middleware.js');
 
 const PerfumeController = require('./perfume.controller');
@@ -53,6 +54,16 @@ module.exports = Router([
       createGroupRoleMiddleware('admin'),
       createRequestValidator(PerfumeRequest.updateStock),
       PerfumeController.updateStock,
+    ],
+  },
+  {
+    path: '/perfumes/:id/photo',
+    method: 'patch',
+    handler: [
+      authMiddleware,
+      createGroupRoleMiddleware('admin'),
+      createUploadMiddleware(PerfumeRequest.uploadPhoto),
+      PerfumeController.updatePhoto,
     ],
   },
   {
