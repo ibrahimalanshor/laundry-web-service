@@ -1,17 +1,6 @@
-# Taks Api
+# Laundry Web Service
 
-Api for taks
-
-# Todo
-
-- [x] Init (Readme, Git)
-- [x] Setup (Server, Deps)
-- [ ] Development & Unit Test
-- [ ] Testing
-- [ ] Deployment
-- [ ] Maintainance
-
-# Instalation
+## Install
 
 Install Deps
 
