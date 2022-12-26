@@ -45,5 +45,10 @@
     },
     "perfume": {
         "stock-invalid": "Stock Invalid"
+    },
+    "order": {
+        "update-status-processed-must-be-from-created": "Update Order Status to processed must be from created",
+        "update-status-finished-must-be-from-processed": "Update Order Status to finished must be from processed",
+        "update-status-taken-must-be-paid": "Update Order Status to taken must be paid first"
     }
 }

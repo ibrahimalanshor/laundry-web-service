@@ -31,6 +31,7 @@ Query.prototype.find = async function (config = {}) {
   const res = await this.model
     .findOne(this.whereFields)
     .select(this.selectFields)
+    .sort(this.sortField)
     .populate(this.populate);
 
   if (config.throwOnFail && res === null) {
@@ -60,8 +61,8 @@ Query.prototype.paginate = async function ({ page, limit }) {
 };
 
 Query.prototype.where = function (field, value, options = {}) {
-  if (value) {
-    if (typeof value !== 'object' && QueryHelper.valueHasOperator(value)) {
+  if (value !== undefined) {
+    if (typeof value === 'string' && QueryHelper.valueHasOperator(value)) {
       this.whereFields[field] = QueryHelper.normalizeValueWithOperator(value);
     } else {
       this.whereFields[field] = !options.customOperator

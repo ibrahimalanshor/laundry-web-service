@@ -21,7 +21,7 @@ module.exports = Router([
     ],
   },
   {
-    path: '/orders/:id',
+    path: '/orders/:idOrInvoice',
     method: 'get',
     handler: [authMiddleware, OrderController.find],
   },
@@ -29,5 +29,14 @@ module.exports = Router([
     path: '/orders/:id',
     method: 'delete',
     handler: [authMiddleware, OrderController.delete],
+  },
+  {
+    path: '/orders/:id/status',
+    method: 'patch',
+    handler: [
+      authMiddleware,
+      createRequestValidator(OrderRequest.updateStatus),
+      OrderController.updateStatus,
+    ],
   },
 ]);

@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const methods = require('./user.method.js');
 
 const UserSchema = new Schema(
   {
@@ -26,5 +27,9 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+for (const name in methods) {
+  UserSchema.methods[name] = methods[name];
+}
 
 module.exports = UserSchema;
