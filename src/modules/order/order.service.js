@@ -85,6 +85,15 @@ exports.updateStatus = async function (order, status) {
   return order;
 };
 
+exports.updatePayment = async function (order) {
+  await OrderModel.updateOne(order, {
+    status: 'paid',
+    isPaid: true,
+  });
+
+  return order;
+};
+
 exports.delete = async function (id) {
   const order = await new OrderQuery().findByIdOrFail(id);
 
