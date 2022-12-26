@@ -11,10 +11,14 @@ exports.get = async function (query) {
   const count = await new OrderQuery()
     .search('invoice', query.invoice)
     .where('userId', query.userId)
+    .where('isPaid', query.isPaid)
+    .where('status', query.status)
     .count();
   const rows = await new OrderQuery()
     .search('invoice', query.invoice)
     .where('userId', query.userId)
+    .where('isPaid', query.isPaid)
+    .where('status', query.status)
     .sort(query.sort)
     .paginate({ page: query.page, limit: query.limit });
 
