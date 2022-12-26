@@ -8,9 +8,13 @@ const {
 } = require('./order.helper.js');
 
 exports.get = async function (query) {
-  const count = await new OrderQuery().search('invoice', query.invoice).count();
+  const count = await new OrderQuery()
+    .search('invoice', query.invoice)
+    .where('userId', query.userId)
+    .count();
   const rows = await new OrderQuery()
     .search('invoice', query.invoice)
+    .where('userId', query.userId)
     .sort(query.sort)
     .paginate({ page: query.page, limit: query.limit });
 

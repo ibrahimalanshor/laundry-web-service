@@ -1,10 +1,20 @@
 const { Controller } = require('../../common/controller');
+const { ForbiddenException } = require('../../common/exceptions');
 const OrderService = require('./order.service');
 
 exports.get = new Controller()
   .get()
-  .ctx('query')
-  .handle(async (ctx) => await OrderService.get(ctx.query));
+  .ctx('query', 'user')
+  .handle(async (ctx) => {
+    if (
+      ctx.user.role !== 'admin' &&
+      ctx.query.userId !== ctx.user._id.toString()
+    ) {
+      throw new ForbiddenException();
+    }
+
+    return await OrderService.get(ctx.query);
+  });
 
 exports.create = new Controller()
   .post()
