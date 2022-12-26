@@ -21,7 +21,7 @@ module.exports = Router([
     ],
   },
   {
-    path: '/orders/:id',
+    path: '/orders/:idOrInvoice',
     method: 'get',
     handler: [authMiddleware, OrderController.find],
   },

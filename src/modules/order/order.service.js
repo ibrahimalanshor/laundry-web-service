@@ -46,6 +46,10 @@ exports.find = async function (id) {
   return await new OrderQuery().findByIdOrFail(id);
 };
 
+exports.findByInvoice = async function (invoice) {
+  return await new OrderQuery().where('invoice', invoice).findOrFail();
+};
+
 exports.update = async function (id, body) {
   const order = await new OrderQuery().findByIdOrFail(id);
 

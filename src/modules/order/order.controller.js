@@ -23,8 +23,16 @@ exports.create = new Controller()
 
 exports.find = new Controller()
   .get()
-  .ctx('params', 'query')
-  .handle(async (ctx) => await OrderService.find(ctx.params.id));
+  .ctx('params', 'query', 'user')
+  .handle(async (ctx) => {
+    const order = ctx.query.invoice
+      ? await OrderService.findByInvoice(ctx.params.idOrInvoice)
+      : await OrderService.find(ctx.params.idOrInvoice);
+
+    if (ctx.user.role !== 'admin') ctx.user.canAccessOrder(order);
+
+    return order;
+  });
 
 exports.delete = new Controller()
   .patch()
