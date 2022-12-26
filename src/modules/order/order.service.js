@@ -42,22 +42,24 @@ exports.create = async function (body) {
   });
 };
 
-exports.find = async function (id) {
+exports.find = async function (id, options = {}) {
   return await new OrderQuery()
-    .with(['user', 'packet', 'perfume', 'details.item'])
+    .if(options.populate, (query) => {
+      query.with(['user', 'packet', 'perfume', 'details.item']);
+    })
     .findByIdOrFail(id);
 };
 
-exports.findByInvoice = async function (invoice) {
+exports.findByInvoice = async function (invoice, options = {}) {
   return await new OrderQuery()
-    .with(['user', 'packet', 'perfume', 'details.item'])
+    .if(options.populate, (query) => {
+      query.with(['user', 'packet', 'perfume', 'details.item']);
+    })
     .where('invoice', invoice)
     .findOrFail();
 };
 
-exports.update = async function (id, body) {
-  const order = await new OrderQuery().findByIdOrFail(id);
-
+exports.update = async function (order, body) {
   await OrderModel.updateOne(order, body);
 
   return order;

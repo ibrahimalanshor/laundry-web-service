@@ -26,8 +26,10 @@ exports.find = new Controller()
   .ctx('params', 'query', 'user')
   .handle(async (ctx) => {
     const order = ctx.query.invoice
-      ? await OrderService.findByInvoice(ctx.params.idOrInvoice)
-      : await OrderService.find(ctx.params.idOrInvoice);
+      ? await OrderService.findByInvoice(ctx.params.idOrInvoice, {
+          populate: true,
+        })
+      : await OrderService.find(ctx.params.idOrInvoice, { populate: true });
 
     if (ctx.user.role !== 'admin') ctx.user.canAccessOrder(order);
 
