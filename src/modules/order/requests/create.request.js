@@ -16,7 +16,7 @@ module.exports = [
     .withMessage('validation.mongoid')
     .bail()
     .custom(async (val, { req }) => {
-      if (req.user !== 'admin' && req.user._id.toString() !== val) {
+      if (req.user.role !== 'admin' && req.user._id.toString() !== val) {
         throw new Error('validation.not-exists');
       }
 
