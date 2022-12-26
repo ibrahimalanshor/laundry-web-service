@@ -12,7 +12,10 @@ const PerfumeSchema = new Schema(
       type: Number,
       default: 0,
     },
-    photo: String,
+    photo: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -22,7 +25,7 @@ const PerfumeSchema = new Schema(
 );
 
 for (const name in virtuals) {
-  PerfumeSchema.virtual(name, virtuals[name]);
+  PerfumeSchema.virtual(name).get(virtuals[name]);
 }
 
 module.exports = PerfumeSchema;

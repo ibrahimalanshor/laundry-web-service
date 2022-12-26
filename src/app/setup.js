@@ -19,6 +19,7 @@ module.exports = function setupApp(config = {}) {
   app.use(helmet());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+  app.use('/uploads', express.static(config.staticPath || 'public'));
   app.use(createLocaleMiddleware());
   app.use(setupI18n(config.messages, config.defaultLocale));
 

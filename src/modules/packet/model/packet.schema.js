@@ -17,7 +17,10 @@ const PacketSchema = new Schema(
       type: String,
       enum: ['jam', 'hari'],
     },
-    photo: String,
+    photo: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -27,7 +30,7 @@ const PacketSchema = new Schema(
 );
 
 for (const name in virtuals) {
-  PacketSchema.virtual(name, virtuals[name]);
+  PacketSchema.virtual(name).get(virtuals[name]);
 }
 
 module.exports = PacketSchema;

@@ -8,6 +8,7 @@ const app = setup({
   port: config.app.port,
   defaultLocale: config.app.locale,
   env: config.env,
+  staticPath: config.app.uploadDir,
   routes,
 });
 

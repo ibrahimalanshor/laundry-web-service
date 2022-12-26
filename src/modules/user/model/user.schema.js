@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const methods = require('./user.method.js');
+const virtuals = require('./user.virtual');
 
 const UserSchema = new Schema(
   {
@@ -12,7 +13,10 @@ const UserSchema = new Schema(
       unique: true,
     },
     name: String,
-    photo: String,
+    photo: {
+      type: String,
+      default: null,
+    },
     password: {
       type: String,
       select: false,
@@ -25,11 +29,17 @@ const UserSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
 for (const name in methods) {
   UserSchema.methods[name] = methods[name];
+}
+
+for (const name in virtuals) {
+  UserSchema.virtual(name).get(virtuals[name]);
 }
 
 module.exports = UserSchema;

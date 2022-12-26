@@ -7,7 +7,10 @@ const ItemSchema = new Schema(
       type: String,
       unique: true,
     },
-    photo: String,
+    photo: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -17,7 +20,7 @@ const ItemSchema = new Schema(
 );
 
 for (const name in virtuals) {
-  ItemSchema.virtual(name, virtuals[name]);
+  ItemSchema.virtual(name).get(virtuals[name]);
 }
 
 module.exports = ItemSchema;
