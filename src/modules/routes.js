@@ -5,4 +5,5 @@ module.exports = [
   require('./item/item.route'),
   require('./order/order.route'),
   require('./payment/payment.route'),
+  require('./review/review.route'),
 ];
