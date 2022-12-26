@@ -11,11 +11,7 @@ module.exports = Router([
   {
     path: '/perfumes',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      PerfumeController.get,
-    ],
+    handler: [authMiddleware, PerfumeController.get],
   },
   {
     path: '/perfumes',
@@ -30,11 +26,7 @@ module.exports = Router([
   {
     path: '/perfumes/:id',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      PerfumeController.find,
-    ],
+    handler: [authMiddleware, PerfumeController.find],
   },
   {
     path: '/perfumes/:id',

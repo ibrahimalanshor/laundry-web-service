@@ -11,11 +11,7 @@ module.exports = Router([
   {
     path: '/items',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      ItemController.get,
-    ],
+    handler: [authMiddleware, ItemController.get],
   },
   {
     path: '/items',
@@ -30,11 +26,7 @@ module.exports = Router([
   {
     path: '/items/:id',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      ItemController.find,
-    ],
+    handler: [authMiddleware, ItemController.find],
   },
   {
     path: '/items/:id',
