@@ -14,9 +14,13 @@ const OrderSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
-      enum: ['created', 'processed', 'finished', 'taken'],
+      enum: ['created', 'processed', 'finished', 'taken', 'deleted'],
       default: 'created',
     },
     totalPrice: Number,
