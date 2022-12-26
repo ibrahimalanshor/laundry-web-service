@@ -43,11 +43,16 @@ exports.create = async function (body) {
 };
 
 exports.find = async function (id) {
-  return await new OrderQuery().findByIdOrFail(id);
+  return await new OrderQuery()
+    .with(['user', 'packet', 'perfume', 'details.item'])
+    .findByIdOrFail(id);
 };
 
 exports.findByInvoice = async function (invoice) {
-  return await new OrderQuery().where('invoice', invoice).findOrFail();
+  return await new OrderQuery()
+    .with(['user', 'packet', 'perfume', 'details.item'])
+    .where('invoice', invoice)
+    .findOrFail();
 };
 
 exports.update = async function (id, body) {
