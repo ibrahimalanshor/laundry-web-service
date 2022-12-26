@@ -30,4 +30,13 @@ module.exports = Router([
     method: 'delete',
     handler: [authMiddleware, OrderController.delete],
   },
+  {
+    path: '/orders/:id/status',
+    method: 'patch',
+    handler: [
+      authMiddleware,
+      createRequestValidator(OrderRequest.updateStatus),
+      OrderController.updateStatus,
+    ],
+  },
 ]);

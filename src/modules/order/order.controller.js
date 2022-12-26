@@ -36,6 +36,19 @@ exports.find = new Controller()
     return order;
   });
 
+exports.updateStatus = new Controller()
+  .get()
+  .ctx('params', 'user', 'body')
+  .handle(async (ctx) => {
+    const order = await OrderService.find(ctx.params.id);
+
+    if (ctx.user.role !== 'admin') ctx.user.canAccessOrder(order);
+
+    await OrderService.updateStatus(order, ctx.body.status);
+
+    return order;
+  });
+
 exports.delete = new Controller()
   .patch()
   .ctx('params')

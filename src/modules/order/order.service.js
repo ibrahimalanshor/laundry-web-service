@@ -6,6 +6,7 @@ const {
   countEstimatedFinishAt,
   countTotalPrice,
 } = require('./order.helper.js');
+const { BadRequestException } = require('../../common/exceptions/index.js');
 
 exports.get = async function (query) {
   const count = await new OrderQuery()
@@ -61,6 +62,25 @@ exports.findByInvoice = async function (invoice, options = {}) {
 
 exports.update = async function (order, body) {
   await OrderModel.updateOne(order, body);
+
+  return order;
+};
+
+exports.updateStatus = async function (order, status) {
+  if (status === 'processed' && order.status !== 'created')
+    throw new BadRequestException(
+      {},
+      'order.update-status-processed-must-be-from-created'
+    );
+  if (status === 'finished' && order.status !== 'processed')
+    throw new BadRequestException(
+      {},
+      'order.update-status-finished-must-be-from-processed'
+    );
+  if (status === 'taken' && order.status !== 'paid' && !order.isPaid)
+    throw new BadRequestException({}, 'order.update-status-taken-must-be-paid');
+
+  await OrderModel.updateOne(order, { status });
 
   return order;
 };
