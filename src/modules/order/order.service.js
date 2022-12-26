@@ -13,12 +13,14 @@ exports.get = async function (query) {
     .search('invoice', query.invoice)
     .where('userId', query.userId)
     .where('isPaid', query.isPaid)
+    .where('isDeleted', query.isDeleted ?? false)
     .where('status', query.status)
     .count();
   const rows = await new OrderQuery()
     .search('invoice', query.invoice)
     .where('userId', query.userId)
     .where('isPaid', query.isPaid)
+    .where('isDeleted', query.isDeleted ?? false)
     .where('status', query.status)
     .sort(query.sort)
     .paginate({ page: query.page, limit: query.limit });
@@ -101,7 +103,9 @@ exports.updatePayment = async function (order) {
 exports.delete = async function (id) {
   const order = await new OrderQuery().findByIdOrFail(id);
 
-  await OrderModel.deleteOne(order);
+  await OrderModel.updateOne(order, {
+    isDeleted: true,
+  });
 
   return order;
 };
