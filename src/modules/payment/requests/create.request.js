@@ -46,7 +46,6 @@ module.exports = [
     .custom(async (val, { req }) => {
       const exists = await new OrderQuery()
         .whereObjectId('_id', val)
-        .where('status', 'paid', { operator: '$ne' })
         .where('isPaid', false)
         .if(req.user.role !== 'admin', (query) => {
           query.whereObjectId('userId', req.user._id);
