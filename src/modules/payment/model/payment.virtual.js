@@ -4,9 +4,9 @@ exports.user = {
   foreignField: '_id',
   justOne: true,
 };
-exports.packet = {
-  ref: 'packet',
-  localField: 'packetId',
+exports.order = {
+  ref: 'order',
+  localField: 'orderId',
   foreignField: '_id',
   justOne: true,
 };
