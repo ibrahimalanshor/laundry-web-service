@@ -11,11 +11,7 @@ module.exports = Router([
   {
     path: '/packets',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      PacketController.get,
-    ],
+    handler: [authMiddleware, PacketController.get],
   },
   {
     path: '/packets',
@@ -30,11 +26,7 @@ module.exports = Router([
   {
     path: '/packets/:id',
     method: 'get',
-    handler: [
-      authMiddleware,
-      createGroupRoleMiddleware('admin'),
-      PacketController.find,
-    ],
+    handler: [authMiddleware, PacketController.find],
   },
   {
     path: '/packets/:id',
