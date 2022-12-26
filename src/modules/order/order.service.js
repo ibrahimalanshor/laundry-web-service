@@ -67,6 +67,8 @@ exports.update = async function (order, body) {
 };
 
 exports.updateStatus = async function (order, status) {
+  if (order.status === 'taken')
+    throw new BadRequestException({}, 'order.update-status-already-taken');
   if (status === 'processed' && order.status !== 'created')
     throw new BadRequestException(
       {},
@@ -77,10 +79,21 @@ exports.updateStatus = async function (order, status) {
       {},
       'order.update-status-finished-must-be-from-processed'
     );
-  if (status === 'taken' && order.status !== 'paid' && !order.isPaid)
-    throw new BadRequestException({}, 'order.update-status-taken-must-be-paid');
+  if (status === 'taken' && (order.status !== 'finished' || !order.isPaid))
+    throw new BadRequestException(
+      {},
+      'order.update-status-taken-must-be-finished-and-paid'
+    );
 
   await OrderModel.updateOne(order, { status });
+
+  return order;
+};
+
+exports.updatePayment = async function (order) {
+  await OrderModel.updateOne(order, {
+    isPaid: true,
+  });
 
   return order;
 };

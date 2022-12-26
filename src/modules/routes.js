@@ -4,4 +4,5 @@ module.exports = [
   require('./perfume/perfume.route'),
   require('./item/item.route'),
   require('./order/order.route'),
+  require('./payment/payment.route'),
 ];
