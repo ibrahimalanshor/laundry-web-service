@@ -2,17 +2,7 @@ const OrderQuery = require('./order.query.js');
 const dateHelper = require('../../common/helpers/date.js');
 
 exports.getLatestInvoice = async function () {
-  const latestOrder = await new OrderQuery()
-    .where(
-      'createdAt',
-      {
-        $gte: dateHelper.getStartOfTheDay(),
-        $lte: dateHelper.getEndOfTheDay(),
-      },
-      { customOperator: true }
-    )
-    .sort('-invoice')
-    .find();
+  const latestOrder = await new OrderQuery().sort('-invoice').find();
   const latestNo =
     (latestOrder ? parseInt(latestOrder.invoice.slice(1)) : 0) + 1;
 
